@@ -49,6 +49,8 @@
                 <br>
                 <input type="text" placeholder="escriba el exponente" id="num3">
                 <hr>
+                su numero es: <label id="valor_normal"></label>
+                <hr>
                 Su derivacion es igual a:<label id="resultado"></label>
                 <hr>
                 Su integracion es igual a:<label id="resultado2"></label>
@@ -68,12 +70,14 @@
             var Number1_3 = Number1.substring(pos);
             if (Number1_2>-1) {
                 if (pos > 0){
-                derivacionFraccion(pos);
-                integracionFraccion(pos);
+                    numero();
+                    derivacionFraccion(pos);
+                    integracionFraccion(pos);
                 }else
                 {
-                derivacionEntero();
-                integracionEntero();
+                    numero();
+                    derivacionEntero();
+                    integracionEntero();
                 }
             }else{
                 alert('El numero que desea no esta permitido, intente con otro');
@@ -81,14 +85,34 @@
         }
             
 
-        function derivacionEntero(){
-            var Number1=parseInt(document.getElementById('num1').value);
+        function numero(){
+            var Number1=document.getElementById('num1').value;
             var variable = document.getElementById('variable').value;
-            var Number3=parseInt(document.getElementById('num3').value);
-            var result= (Number1 * Number3 )+ variable;
-            var result2 = Number3-1;
+            var Number3=document.getElementById('num3').value;
 
-            document.getElementById('resultado').innerHTML = (result+ '<sup>'+result2+'</sup>');
+            document.getElementById('valor_normal').innerHTML = (Number1 + variable + '<sup>' + Number3 + '</sup>');
+        }
+    
+        function derivacionEntero(){
+            var Number1=document.getElementById('num1').value;
+            var variable = document.getElementById('variable').value;
+            var Number3=document.getElementById('num3').value;
+
+            var pos2 =Number3.search('/');
+            var number3_2 = Number3.substring(0,pos2);
+            var number3_3 = Number3.substring(pos2+1);
+            if (pos2>0) {
+                var result = (Number1 * number3_2)+variable;
+                var result2 = (parseInt(number3_3) / parseInt(number3_3));
+                var result2_2 = (number3_2 * result2);
+                var result3 = (parseInt(number3_3) * 1)
+                var result4 = (result2_2 - result3);
+                document.getElementById('resultado').innerHTML = (result + '<sup>'+result4 + '/'+ number3_3 +'</sup>'+ '/' + number3_3);
+            }else{
+                var result= (Number1 * Number3 )+ variable;
+                var result2 = Number3-1; 
+                document.getElementById('resultado').innerHTML = (result+ '<sup>'+result2+'</sup>');
+            }
         }
         
 
@@ -96,30 +120,82 @@
             var Number1=document.getElementById('num1').value;
             var variable = document.getElementById('variable').value;
             var Number3=document.getElementById('num3').value;
-            var result3 = Number1.substring(0,pos);
-            var result4 = Number1.substring(pos+1);
-            var result2 = Number3-1;
-            var result = (result3 *Number3)+variable;
-            document.getElementById('resultado').innerHTML = (result + '<sup>' + result2 + '</sup>/' + result4);
+
+            var pos2 =Number3.search('/');
+            var number3_2 = Number3.substring(0,pos2);
+            var number3_3 = Number3.substring(pos2+1);
+            if (pos2>0) {
+                var result = Number1.substring(0,pos);
+                var result2 = Number1.substring(pos+1);
+                var result3 = (parseInt(number3_2) * result);
+                var result3_2 = (parseInt(number3_3) * result2);
+                var result4 = (parseInt(number3_3) / parseInt(number3_3));
+                var result4_2 = (number3_2 * result4);
+                var result5 = (parseInt(number3_3) * 1);
+                var result6 = (result4_2 - result5);
+
+                document.getElementById('resultado').innerHTML = (result3 + variable + '<sup>'+result6 + '/'+ number3_3 +'</sup>' + '/' + result3_2);
+            }else{
+                var result3 = Number1.substring(0,pos);
+                var result4 = Number1.substring(pos+1);
+                var result2 = Number3-1;
+                var result = (result3 *Number3)+variable;
+
+                document.getElementById('resultado').innerHTML = (result + '<sup>' + result2 + '</sup>/' + result4); 
+            }
         }
 
         function integracionEntero(){
-            var Number1=parseInt(document.getElementById('num1').value);
+            var Number1=document.getElementById('num1').value;
             var variable = document.getElementById('variable').value;
-            var Number3=parseInt(document.getElementById('num3').value);
-            var result2 = Number3 + 1;
-            document.getElementById('resultado2').innerHTML = (Number1 + variable +'<sup>'+ result2 + '</sup>/' + result2);
+            var Number3=document.getElementById('num3').value;
+
+            var pos2 = Number3.search('/');
+            var number3_2 = Number3.substring(0,pos2);
+            var number3_3 = Number3.substring(pos2+1);
+            if (pos2>0) {
+                var result = (parseInt(number3_3) / parseInt(number3_3));
+                var result_2 = (number3_2 * result);
+                var result3 = (parseInt(number3_3) * 1);
+                var result4 = (result_2 + result3);
+                var result5 = (number3_3 * Number1) + variable;
+
+                document.getElementById('resultado2').innerHTML = (result5 +'<sup>'+ result4 + '/' + number3_3 + '</sup>/' + result4 + ' + C');
+            }else{
+                var result2 = parseInt(Number3) + 1;
+                document.getElementById('resultado2').innerHTML = (Number1 + variable +'<sup>'+ result2 + '</sup>/' + result2 + ' + C');
+            }
         }
 
         function integracionFraccion(pos){
             var Number1 = document.getElementById('num1').value;
             var variable = document.getElementById('variable').value;
             var Number3 = document.getElementById('num3').value;
-            var result3 = Number1.substring(0,pos)+variable;
-            var result4 = Number1.substring(pos+1);
-            var result2 = (parseInt(Number3) + 1);
-            var result = (result2 * result4);
-            document.getElementById('resultado2').innerHTML = (result3 + '<sup>' + result2 + '</sup>/' + result);
+
+            var pos2 = Number3.search('/');
+            var number3_2 = Number3.substring(0,pos2);
+            var number3_3 = Number3.substring(pos2+1);
+            if (pos2>0) {
+                var result = Number1.substring(0,pos);
+                var result2 = Number1.substring(pos+1);
+                var result3 = (parseInt(number3_3) / parseInt(number3_3));
+                var result3_2 = (number3_2 * result3);
+                var result4 = (parseInt(number3_3) * 1);
+                var result5 = (result3_2 + result4);
+                var result6 = (parseInt(result2) * result5);
+                var result7 = (parseInt(number3_3) * result);
+
+                document.getElementById('resultado2').innerHTML = (result7 + variable + '<sup>' + result5 + '/' + number3_3 + '</sup>/' + result6 + ' + C');
+            }else{
+                var result = Number1.substring(0,pos);
+                var result2 = Number1.substring(pos+1);
+                var result3 = Number1.substring(0,pos)+variable;
+                var result4 = Number1.substring(pos+1);
+                var result2 = (parseInt(Number3) + 1);
+                var result = (result2 * result4);
+                
+                document.getElementById('resultado2').innerHTML = (result3 + '<sup>' + result2 + '</sup>/' + result + ' + C');
+            }
             
         }
         
